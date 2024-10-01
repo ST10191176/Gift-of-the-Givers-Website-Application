@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration and Login</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    /* Container for the form */
+    .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #ff6700;
+      text-align: center;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    /* Style for buttons */
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ff6700;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for buttons */
+    button:hover {
+      background-color: #ff8533;
+    }
+
+    /* Style for login/register sections */
+    .section {
+      margin-bottom: 30px;
+    }
+
+    /* Add some margin between the forms */
+    .divider {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>User Registration</h2>
+    
+    <div class="section">
+      <input type="email" id="registerEmail" placeholder="Email" required>
+      <input type="password" id="registerPassword" placeholder="Password" required>
+      <button id="registerButton">Register</button>
+    </div>
+
+    <div class="divider">or</div>
+
+    <h2>Login</h2>
+    <div class="section">
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button id="loginButton">Login</button>
+    </div>
+  </div>
+
+  <!-- Load the JavaScript logic -->
+  <script type="module">
+    import { register, login } from './auth.js';
+
+    // Attach the register and login functions to the buttons
+    document.getElementById('registerButton').onclick = register;
+    document.getElementById('loginButton').onclick = login;
+  </script>
+</body>
+</html>

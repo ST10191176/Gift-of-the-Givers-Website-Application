@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #ff6700;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ff6700;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2>Available Volunteer Tasks</h2>
+  <table id="tasksTable">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Task rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <script type="module">
+    import { getTasks } from './taskManager.js';
+
+    // Load tasks on page load
+    getTasks();
+  </script>
+</body>
+</html>

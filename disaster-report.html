@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Reporting</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      background-color: white;
+      padding: 20px;
+      margin: 0 auto;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      background-color: #ff6700;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    h2 {
+      color: #ff6700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Report a Disaster</h2>
+    <form id="disasterForm">
+      <label for="disasterType">Type of Disaster:</label>
+      <select id="disasterType" required>
+        <option value="Flood">Flood</option>
+        <option value="Earthquake">Earthquake</option>
+        <option value="Wildfire">Wildfire</option>
+        <option value="Hurricane">Hurricane</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" placeholder="Enter location" required>
+
+      <label for="description">Description:</label>
+      <textarea id="description" rows="4" placeholder="Describe the situation..." required></textarea>
+
+      <button type="submit">Submit Report</button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { db } from './firebaseConfig.js';
+    import { addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js';
+
+    document.getElementById('disasterForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const disasterType = document.getElementById('disasterType').value;
+      const location = document.getElementById('location').value;
+      const description = document.getElementById('description').value;
+
+      try {
+        await addDoc(collection(db, 'disasters'), {
+          disasterType,
+          location,
+          description,
+          timestamp: new Date().toISOString(),
+        });
+
+        alert('Disaster report submitted successfully!');
+      } catch (error) {
+        console.error('Error reporting disaster:', error.message);
+        alert('Error submitting the report.');
+      }
+    });
+  </script>
+</body>
+</html>
