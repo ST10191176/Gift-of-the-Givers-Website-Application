@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Registration</title>
+  <style>
+    /* Same styling as donation form */
+  </style>
+</head>
+<body>
+  <div class="volunteer-form">
+    <h2>Volunteer Registration</h2>
+    <form id="volunteerForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+
+      <label for="contact">Contact Information</label>
+      <input type="text" id="contact" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { registerVolunteer } from './volunteerManager.js';
+
+    document.getElementById('volunteerForm').onsubmit = (event) => {
+      event.preventDefault();
+      registerVolunteer();
+    };
+  </script>
+</body>
+</html>

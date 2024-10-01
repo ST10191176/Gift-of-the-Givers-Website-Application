@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ff6700;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2>Donation Tracker</h2>
+  <table id="donationTable">
+    <thead>
+      <tr>
+        <th>Resource Type</th>
+        <th>Quantity</th>
+        <th>Notes</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Donation rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <script type="module">
+    import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js';
+    import { db } from './firebaseConfig.js';
+
+    async function loadDonations() {
+      const donationsSnapshot = await getDocs(collection(db, 'donations'));
+      const donations = donationsSnapshot.docs.map(doc => doc.data());
+
+      const donationTableBody = document.querySelector('#donationTable tbody');
+      donationTableBody.innerHTML = '';
+
+      donations.forEach(donation => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${donation.resourceType}</td>
+          <td>${donation.quantity}</td>
+          <td>${donation.notes}</td>
+          <td>${new Date(donation.timestamp.seconds * 1000).toLocaleString()}</td>
+        `;
+        donationTableBody.appendChild(row);
+      });
+    }
+
+    loadDonations();
+  </script>
+</body>
+</html>
